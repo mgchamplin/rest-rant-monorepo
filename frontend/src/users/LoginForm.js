@@ -31,6 +31,7 @@ function LoginForm() {
 
         if (response.status === 200) {
             console.log("SETTING USER")
+            console.log(data.token)
             setCurrentUser(data.user)
 
             /*setCurrentUser({
