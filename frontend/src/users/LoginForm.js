@@ -32,12 +32,9 @@ function LoginForm() {
         if (response.status === 200) {
             console.log("SETTING USER")
             console.log(data.token)
-            setCurrentUser(data.user)
 
-            /*setCurrentUser({
-                firstName: 'Michael',
-                lastName: 'Champolan'
-            })*/
+            setCurrentUser(data.user)
+            localStorage.setItem('token',data.token)
             history.push(`/`)
         } else {
             console.log("USER LOGIN FAIL")
