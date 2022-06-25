@@ -11,7 +11,7 @@ function Navigation() {
     let loginActions = (
         <>
             <li style={{ float: 'right' }}>
-                {/* Changed href from # to avoid warning   xx*/}
+                {/* Changed href from # to avoid warning   xx JWT BRANCH*/}
                 <a href="/sign-up" onClick={() => history.push("/sign-up")}>
                     Sign Up
                 </a>
