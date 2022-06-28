@@ -128,8 +128,7 @@ function PlaceDetails() {
 						Serving {place.cuisines}.
 					</h4>
 					<br />
-					{/*Added href below bc of warning*/}
-					<a href='/' className="btn btn-warning" onClick={editPlace}>
+					<a className="btn btn-warning" onClick={editPlace}>
 						Edit
 					</a>{` `}
 					<button type="submit" className="btn btn-danger" onClick={deletePlace}>
