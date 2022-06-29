@@ -1,7 +1,15 @@
 import { useState } from "react"
 import { useHistory } from "react-router"
+import { useContext } from "react"
+import { CurrentUser } from "../contexts/CurrentUser"
 
 function NewPlaceForm() {
+
+    const { setCurrentUser } = useContext(CurrentUser)
+    setCurrentUser(null)
+
+    console.log("CUR USER = NULLLLLL")
+
 
 	const history = useHistory()
 

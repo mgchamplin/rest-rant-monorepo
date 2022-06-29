@@ -24,6 +24,7 @@ function LoginForm() {
             },
             body: JSON.stringify(credentials)
         })
+        console.log("CRENDITIALS = ", credentials)
 
         const data = await response.json()
 
