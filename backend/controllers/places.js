@@ -89,6 +89,36 @@ router.post('/:placeId/comments', async (req, res) => {
     req.body.rant = req.body.rant ? true : false
 
     const place = await Place.findOne({
+        where: { placeId: placeId }
+    })
+
+    if (!place) {
+        return res.status(404).json({ message: `Could not find place with id "${placeId}"` })
+    }
+
+    if (!req.currentUser) {
+        return res.status(404).json({ message: `You must be logged in to leave a rant or rave.` })
+    }
+
+    const comment = await Comment.create({
+        ...req.body,
+        authorId: req.currentUser.userId,
+        placeId: placeId
+    })
+
+    res.send({
+        ...comment.toJSON(),
+        author: req.currentUser
+    })
+})
+
+/*
+router.post('/:placeId/comments', async (req, res) => {
+    const placeId = Number(req.params.placeId)
+
+    req.body.rant = req.body.rant ? true : false
+
+    const place = await Place.findOne({
         where: { placeId: placeId }  
     })
 
@@ -122,7 +152,7 @@ router.post('/:placeId/comments', async (req, res) => {
         author: currentUser
     })
 })
-
+*/
 
 router.delete('/:placeId/comments/:commentId', async (req, res) => {
     let placeId = Number(req.params.placeId)
