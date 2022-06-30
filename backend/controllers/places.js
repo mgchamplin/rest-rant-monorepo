@@ -1,7 +1,5 @@
 const router = require('express').Router()
 const db = require("../models")
-const jwt = require('json-web-token')
-
 
 const { Place, Comment, User } = db
 
@@ -154,6 +152,8 @@ router.post('/:placeId/comments', async (req, res) => {
 })
 */
 
+  
+
 router.delete('/:placeId/comments/:commentId', async (req, res) => {
     let placeId = Number(req.params.placeId)
     let commentId = Number(req.params.commentId)
@@ -167,13 +167,27 @@ router.delete('/:placeId/comments/:commentId', async (req, res) => {
             where: { commentId: commentId, placeId: placeId }
         })
         if (!comment) {
-            res.status(404).json({ message: `Could not find comment with id "${commentId}" for place with id "${placeId}"` })
+            console.log("COMMENT UNAVAILABLE")
+            res.status(404).json({ 
+                message: `Could not find comment` 
+            })
+        } else if (comment.authorId !== req.currentUser?.userId) {
+            console.log("COMMENT DELETE USER  MISMATCH")
+
+            res.status(403).json({ 
+                message: `You do not have permission to delete comment "${comment.commentId}"` 
+            })
         } else {
+            console.log("COMMENT DELETED")
+
             await comment.destroy()
             res.json(comment)
         }
     }
 })
+
+  
+
 
 
 module.exports = router

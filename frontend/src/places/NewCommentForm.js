@@ -30,6 +30,10 @@ function NewCommentForm({ place, onSubmit }) {
         })
     }
 
+    if (!currentUser) {
+        return <p>You must be logged in to leave a comment</p>
+    }
+
     return (
         <form onSubmit={handleSubmit}> 
             <div className="row">
